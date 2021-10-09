@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        unordered_map<char,int> mp;
+        mp['I']=1;     //It can be declared by unordered_map.put as well.
+        mp['V']=5;
+        mp['X']=10;
+        mp['l']=50;
+        mp['C']=100;
+        mp['D']=500;
+        mp['M']=1000;  
+        
+        int sum=0 , n=s.length();  //It is better to take the length before hand for better convinient.
+        for(int i=0; i < n ; i++)    
+        if(i+1 < n && mp[s[i]]<mp[s[i+1]])
+        {
+            sum += mp[s[i+1]]-2*mp[s[i]];  //As we have summed up the coming value so we have to undo by one multiplication and subtract by 2nd multiplication.
+            i++;
+        }
+        else
+        {
+            sum += mp[s[i]];
+        }
+         return sum;
+    }
+  
+};
